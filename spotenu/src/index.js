@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import styled from 'styled-components';
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Home from './pages/Home'
@@ -9,18 +10,25 @@ import BandListener from './pages/signup/BandListener'
 import Login from './pages/Login'
 import BandApprove from './pages/BandApprove'
 
+const IndexWrapper = styled.div`
+  width: 100vw;
+  max-width: 400px;
+`;
+
 const Page404 = () => <div>Page 404 Not Found</div>
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Switch>
-      <Route path="/" component={Login} exact />
-      <Route path="/signup/admin" component={Admin} exact />
-      <Route path="/signup" component={BandListener} exact />
-      <Route path="/home" component={Home} exact />
-      <Route path="/admin/approve" component={BandApprove} exact />
-      <Route component={Page404} />
-    </Switch>
-  </BrowserRouter>,
+  <IndexWrapper>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" component={Login} exact />
+        <Route path="/signup/admin" component={Admin} exact />
+        <Route path="/signup" component={BandListener} exact />
+        <Route path="/home" component={Home} exact />
+        <Route path="/admin/approve" component={BandApprove} exact />
+        <Route component={Page404} />
+      </Switch>
+    </BrowserRouter>
+  </IndexWrapper>,
   document.getElementById('root')
 );

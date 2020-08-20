@@ -7,11 +7,17 @@ import { requestPost } from '../../hooks/useRequest';
 const LoginWrapper = styled.form`
     display: grid;
     gap: 16px;
+    padding-top: 32px;
 `;
 
 const InputWrapper = styled.div`
     display: grid;
     gap: 8px;
+`;
+
+const Button = styled.button`
+    color: black;
+    background: white;
 `;
 
 function Login() {
@@ -40,7 +46,7 @@ function Login() {
             <InputWrapper>
                 <label>Login:</label>
                 <input
-                    placeholder={"nickname ou email"}
+                    placeholder={"Nickname ou email"}
                     onChange={handleInputChange}
                     value={form.nicknameOrEmail}
                     name={"nicknameOrEmail"}
@@ -50,7 +56,7 @@ function Login() {
             <InputWrapper>
                 <label>Senha:</label>
                 <input
-                    placeholder={"senha"}
+                    placeholder={"Senha"}
                     onChange={handleInputChange}
                     value={form.password}
                     name={"password"}
@@ -58,8 +64,10 @@ function Login() {
                 />
             </InputWrapper>
             <button>ENTRAR</button>
-            <label>Não possui cadastro...</label>
-            <button onClick={() => history.push("/signup")}>CADASTRAR-SE</button>
+            <div>
+                <label>Não possui cadastro... </label>
+                <Button as="label" onClick={() => history.push("/signup")}>CADASTRAR-SE</Button>
+            </div>
         </LoginWrapper>
     );
 }

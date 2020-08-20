@@ -7,6 +7,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
   display: flex;
   justify-content: center;
+  font-family: 'Comfortaa', cursive;
+}
+
+body button, select, input {
+  font-family: 'Roboto', sans-serif;
+}
+
+body button {
+  font-weight: bold;
+  color: white;
+  background: black;
+  border-radius: 4px;
+  text-decoration: none;
+  border: none;
+  height: 32px;
 }
 
 code {
