@@ -38,7 +38,7 @@ function Login() {
     return (
         <LoginWrapper onSubmit={handleSubmit}>
             <InputWrapper>
-                <label>Login: </label>
+                <label>Login:</label>
                 <input
                     placeholder={"nickname ou email"}
                     onChange={handleInputChange}
