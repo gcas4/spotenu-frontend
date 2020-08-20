@@ -5,8 +5,7 @@ import './index.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Admin from './pages/signup/Admin'
-import Band from './pages/signup/Band'
-import Listener from './pages/signup/Listener'
+import BandListener from './pages/signup/BandListener'
 import Login from './pages/Login'
 import BandApprove from './pages/BandApprove'
 
@@ -15,12 +14,11 @@ const Page404 = () => <div>Page 404 Not Found</div>
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route path="/" component={Home} exact />
-      <Route path="/signup/admin" component={Admin} />
-      <Route path="/signup/band" component={Band} />
-      <Route path="/signup/listener" component={Listener} />
-      <Route path="/login" component={Login} />
-      <Route path="/admin/approve" component={BandApprove} />
+      <Route path="/" component={Login} exact />
+      <Route path="/signup/admin" component={Admin} exact />
+      <Route path="/signup" component={BandListener} exact />
+      <Route path="/home" component={Home} exact />
+      <Route path="/admin/approve" component={BandApprove} exact />
       <Route component={Page404} />
     </Switch>
   </BrowserRouter>,

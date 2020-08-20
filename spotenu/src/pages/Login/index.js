@@ -1,16 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
+import { requestPost } from '../../hooks/useRequest';
 
 const LoginWrapper = styled.form`
     display: grid;
     gap: 16px;
 `;
 
-function Login() {
+const InputWrapper = styled.div`
+    display: grid;
+    gap: 8px;
+`;
 
+function Login() {
     const history = useHistory();
     const { form, onChange } = useForm({
         nicknameOrEmail: "",
@@ -18,34 +22,44 @@ function Login() {
     })
 
     const handleInputChange = e => {
-
         const { name, value } = e.target;
         onChange(name, value);
     }
 
-    const handleSubmit = e => {
-
+    const handleSubmit = async e => {
         e.preventDefault();
+        const response = await requestPost("user/login", form);
 
-        axios.post("https://2l8702f2m0.execute-api.us-east-1.amazonaws.com/dev/user/login",
-            form)
-            .then(res => {
-                localStorage.setItem("token", res.data.token)
-                history.push("/")
-            })
-            .catch(err => {
-                console.log(err)
-                window.alert("Login falhou")
-            })
+        if (response.message === "ok") {
+            history.push("/home");
+        }
     }
 
     return (
         <LoginWrapper onSubmit={handleSubmit}>
-            <label>Login: </label>
-            <input placeholder={"nickname or email"} onChange={handleInputChange} value={form.nicknameOrEmail} name={"nicknameOrEmail"} type={"text"} />
-            <label>Password: </label>
-            <input placeholder={"password"} onChange={handleInputChange} value={form.password} name={"password"} type={"password"} />
-            <button>Entrar</button>
+            <InputWrapper>
+                <label>Login: </label>
+                <input
+                    placeholder={"nickname ou email"}
+                    onChange={handleInputChange}
+                    value={form.nicknameOrEmail}
+                    name={"nicknameOrEmail"}
+                    type={"text"}
+                />
+            </InputWrapper>
+            <InputWrapper>
+                <label>Senha:</label>
+                <input
+                    placeholder={"senha"}
+                    onChange={handleInputChange}
+                    value={form.password}
+                    name={"password"}
+                    type={"password"}
+                />
+            </InputWrapper>
+            <button>ENTRAR</button>
+            <label>Não possui cadastro...</label>
+            <button onClick={() => history.push("/signup")}>CADASTRAR-SE</button>
         </LoginWrapper>
     );
 }
