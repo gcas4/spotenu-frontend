@@ -8,6 +8,7 @@ const SignupWrapper = styled.form`
     display: grid;
     gap: 16px;
     padding-top: 32px;
+    padding: 16px;
 `;
 
 const InputWrapper = styled.div`
@@ -18,7 +19,7 @@ const InputWrapper = styled.div`
 const Button = styled.button`
     color: black;
     background: white;
-    border: 2px solid black;
+    border: 1px solid black;
 `;
 
 function BandListenerSignup() {

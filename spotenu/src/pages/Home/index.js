@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import ExitToApp from '@material-ui/icons/ExitToApp';
-import Menu from '@material-ui/icons/Menu';
+import MusicNote from '@material-ui/icons/MusicNote';
 import { useHistory } from 'react-router-dom';
 
 const HomeWrapper = styled.div`
     padding-top: 32px;
+    padding: 16px;
 `;
 
 const Header = styled.header`
@@ -29,7 +30,7 @@ function Home() {
     return (
         <HomeWrapper>
             <Header>
-                <Menu onClick={() => history.push("/admin/approve")} />
+                <MusicNote onClick={() => history.push("/admin/approve")} />
                 <ExitToApp onClick={onLogout} />
             </Header>
             <H1>Home</H1>

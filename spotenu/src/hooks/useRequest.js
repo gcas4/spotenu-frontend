@@ -13,3 +13,33 @@ export const requestPost = async (url, body) => {
         return { res: e.response.data.error, message: "error" }
     }
 }
+
+export const requestPostHeaders = async (url, body) => {
+    try {
+        const result = await axios.post(`${baseUrl}${url}`, body, {
+            headers: { "Authorization": localStorage.getItem("token") }
+        })
+        
+        return { res: result, message: "ok" }
+
+    } catch (e) {
+        window.alert(e.response.data.error)
+        return { res: e.response.data.error, message: "error" }
+    }
+}
+
+export const requestGet = async (url) => {
+    try {
+        const result = await axios.get(`${baseUrl}${url}`, {
+            headers: { "Authorization": localStorage.getItem("token") }
+        })
+
+        return { res: result.data.bands, message: "ok" }
+
+    } catch (e) {
+        window.alert(e.response.data.error) || window.alert(e)
+        return e.response.data.error ?
+            { res: e.response.data.error, message: "error" }
+            : e
+    }
+}

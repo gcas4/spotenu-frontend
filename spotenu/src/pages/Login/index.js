@@ -8,6 +8,7 @@ const LoginWrapper = styled.form`
     display: grid;
     gap: 16px;
     padding-top: 32px;
+    padding: 16px;
 `;
 
 const InputWrapper = styled.div`
@@ -66,7 +67,7 @@ function Login() {
             <button>ENTRAR</button>
             <div>
                 <label>Não possui cadastro... </label>
-                <Button as="label" onClick={() => history.push("/signup")}>CADASTRAR-SE</Button>
+                <Button as="label" onClick={() => history.push("/signup")}>CADASTRE-SE</Button>
             </div>
         </LoginWrapper>
     );
