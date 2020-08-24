@@ -7,11 +7,19 @@ import { useHistory } from 'react-router-dom';
 const SignupWrapper = styled.form`
     display: grid;
     gap: 16px;
+    padding-top: 32px;
+    padding: 16px;
 `;
 
 const InputWrapper = styled.div`
     display: grid;
     gap: 8px;
+`;
+
+const Button = styled.button`
+    color: black;
+    background: white;
+    border: 1px solid black;
 `;
 
 function BandListenerSignup() {
@@ -54,7 +62,7 @@ function BandListenerSignup() {
             <InputWrapper>
                 <label>Descrição:</label>
                 <input
-                    placeholder={"description"}
+                    placeholder={"Descrição"}
                     onChange={handleInputChange}
                     value={form.description}
                     name={"description"}
@@ -75,7 +83,7 @@ function BandListenerSignup() {
             <InputWrapper>
                 <label>Nome:</label>
                 <input
-                    placeholder={"nome"}
+                    placeholder={"Nome"}
                     onChange={handleInputChange}
                     value={form.name}
                     name={"name"}
@@ -85,7 +93,7 @@ function BandListenerSignup() {
             <InputWrapper>
                 <label>Nickname:</label>
                 <input
-                    placeholder={"nickname"}
+                    placeholder={"Nickname"}
                     onChange={handleInputChange}
                     value={form.nickname}
                     name={"nickname"}
@@ -95,7 +103,7 @@ function BandListenerSignup() {
             <InputWrapper>
                 <label>Email:</label>
                 <input
-                    placeholder={"email"}
+                    placeholder={"Email"}
                     onChange={handleInputChange}
                     value={form.email}
                     name={"email"}
@@ -106,7 +114,7 @@ function BandListenerSignup() {
             <InputWrapper>
                 <label>Senha:</label>
                 <input
-                    placeholder={"senha"}
+                    placeholder={"Senha"}
                     onChange={handleInputChange}
                     value={form.password}
                     name={"password"}
@@ -114,7 +122,8 @@ function BandListenerSignup() {
                 />
             </InputWrapper>
             <button>CADASTRAR</button>
-        </SignupWrapper>
+            <Button onClick={() => history.push("/")}>VOLTAR</Button>
+        </SignupWrapper >
     );
 }
 

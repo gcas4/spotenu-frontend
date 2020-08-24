@@ -1,3 +1,8 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -7,6 +12,28 @@ body {
   -moz-osx-font-smoothing: grayscale;
   display: flex;
   justify-content: center;
+  font-family: 'Comfortaa', cursive;
+}
+
+body button, select, input {
+  font-family: 'Roboto', sans-serif;
+}
+
+body button {
+  font-weight: bold;
+  color: white;
+  background: black;
+  border-radius: 4px;
+  text-decoration: none;
+  border: none;
+  height: 40px;
+}
+
+body input, select {
+  border: 1px solid black;
+  height: 32px;
+  padding-left: 8px;
+  font-size: 16px;
 }
 
 code {
