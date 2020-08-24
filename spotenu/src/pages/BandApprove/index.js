@@ -26,7 +26,7 @@ const H1 = styled.label`
 function BandApprove() {
     const history = useHistory();
     const [bands, setBands] = useState([]);
-    let noBandsToApprove;
+    let noBandsToApproveMessage;
 
     const onLogout = () => {
         localStorage.clear();
@@ -38,8 +38,9 @@ function BandApprove() {
     }, [setBands])
 
     const getBands = async () => {
+        //TODO: erro jwt expired aqui, como verificar isso
         const bands = await requestGet("user/bands");
-        if (bands) {
+        if (bands.length !== 0) {
             const bandsToApprove = bands.res
                 .filter(b => b.isApproved === false)
                 .map(b => {
@@ -63,10 +64,12 @@ function BandApprove() {
     }
     //TODO: fazer carregamento das páginas, esperando resposta das requisições
     // colocar styled-components em outro arquivo
+    // o que fazer quando jwt expired
     const approveBands = async () => {
         let result
         let bandsToApprove
-        if (bands) {
+
+        if (bands.length !== 0) {
             bandsToApprove = bands.filter(b => b.isChecked)
         }
 
@@ -74,15 +77,15 @@ function BandApprove() {
             for (let b of bandsToApprove) {
                 result = await requestPostHeaders("user/approve", { "nickname": b.nickname })
             }
-        }
-
-        if (result.message === "ok" || result.message === "error") {
+            if (result.res === "Approved!") {
+                window.alert("Banda(s) aprovada(s)!")
+            }
             getBands()
         }
     }
 
     if (bands.length === 0) {
-        noBandsToApprove = (<label>Nenhuma banda para aprovar</label>)
+        noBandsToApproveMessage = (<label>Nenhuma banda para aprovar</label>)
     }
 
     return (
@@ -97,7 +100,7 @@ function BandApprove() {
                 setBands={setBands}
                 handleInputChange={handleInputChange}
             />
-            {noBandsToApprove}
+            {noBandsToApproveMessage}
             <button onClick={approveBands}>APROVAR</button>
         </BandApproveWrapper>
     );

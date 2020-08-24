@@ -19,8 +19,8 @@ export const requestPostHeaders = async (url, body) => {
         const result = await axios.post(`${baseUrl}${url}`, body, {
             headers: { "Authorization": localStorage.getItem("token") }
         })
-        
-        return { res: result, message: "ok" }
+
+        return { res: result.data.message, message: "ok" }
 
     } catch (e) {
         window.alert(e.response.data.error)

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import MusicNote from '@material-ui/icons/MusicNote';
+import PersonAdd from '@material-ui/icons/PersonAdd';
 import { useHistory } from 'react-router-dom';
 
 const HomeWrapper = styled.div`
@@ -31,6 +32,7 @@ function Home() {
         <HomeWrapper>
             <Header>
                 <MusicNote onClick={() => history.push("/admin/approve")} />
+                <PersonAdd onClick={() => history.push("/signup/admin")} />
                 <ExitToApp onClick={onLogout} />
             </Header>
             <H1>Home</H1>
