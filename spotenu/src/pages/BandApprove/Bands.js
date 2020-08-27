@@ -38,7 +38,7 @@ function Bands({ bands, setBands, handleInputChange }) {
 
     return (
         <BandsForm>
-            <SelectAllButton as="label" onClick={selectAll}>Selecionar todos</SelectAllButton>
+            <SelectAllButton as="label" onClick={selectAll}>Selecionar todas</SelectAllButton>
             {bands && bands.map(b => {
                 return (
                     <EachBand key={b.name}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useForm } from '../../../hooks/useForm';
-import { requestPost } from '../../../hooks/useRequest';
+import { requestPostHeaders } from '../../../hooks/useRequest';
 import { useHistory } from 'react-router-dom';
 
 const SignupWrapper = styled.form`
@@ -24,7 +24,7 @@ const Button = styled.button`
 
 function BandListenerSignup() {
     const history = useHistory();
-    const { form, onChange } = useForm({
+    const { form, onChange, resetValues } = useForm({
         role: "",
         name: "",
         nickname: "",
@@ -40,18 +40,17 @@ function BandListenerSignup() {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        let role = form.role.toLowerCase();
         let body = form;
 
         if (form.role !== "BAND") {
             body = { ...form, description: "" };
-            role = "listener";
         }
 
-        const response = await requestPost(`user/signup/${role}`, body)
+        const response = await requestPostHeaders("user/signup", body)
 
         if (response.message === "ok") {
-            history.push("/home");
+            window.alert(`${form.role} cadastrado(a) com sucesso!`);
+            resetValues();
         }
     }
 

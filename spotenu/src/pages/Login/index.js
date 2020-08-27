@@ -67,7 +67,7 @@ function Login() {
             <button>ENTRAR</button>
             <div>
                 <label>Não possui cadastro... </label>
-                <Button as="label" onClick={() => history.push("/signup")}>CADASTRE-SE</Button>
+                <Button onClick={() => history.push("/signup")}>CADASTRE-SE</Button>
             </div>
         </LoginWrapper>
     );

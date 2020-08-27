@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import MusicNote from '@material-ui/icons/MusicNote';
@@ -6,6 +6,8 @@ import PersonAdd from '@material-ui/icons/PersonAdd';
 import { useHistory } from 'react-router-dom';
 
 const HomeWrapper = styled.div`
+    display: grid;
+    gap: 32px;
     padding-top: 32px;
     padding: 16px;
 `;
@@ -22,6 +24,10 @@ const H1 = styled.label`
 
 function Home() {
     const history = useHistory();
+
+    useEffect(() => {
+        localStorage.getItem("token") === null && history.push("/");
+    }, [history])
 
     const onLogout = () => {
         localStorage.clear();

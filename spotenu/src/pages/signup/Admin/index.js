@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useForm } from '../../../hooks/useForm';
 import { requestPostHeaders } from '../../../hooks/useRequest';
@@ -39,8 +39,13 @@ function AdminSignup() {
         name: "",
         nickname: "",
         email: "",
-        password: ""
+        password: "",
+        role: "ADMIN"
     })
+
+    useEffect(() => {
+        localStorage.getItem("token") === null && history.push("/");
+    }, [history])
 
     const onLogout = () => {
         localStorage.clear();
@@ -55,7 +60,7 @@ function AdminSignup() {
     const handleSubmit = async e => {
         e.preventDefault();
 
-        const response = await requestPostHeaders(`user/signup/admin`, form)
+        const response = await requestPostHeaders("user/signup", form)
 
         if (response.message === "ok") {
             window.alert("Admin cadastrado!");

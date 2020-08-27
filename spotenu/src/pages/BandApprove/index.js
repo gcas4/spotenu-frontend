@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import ExitToApp from '@material-ui/icons/ExitToApp';
-import KeyboardBackspace from '@material-ui/icons/KeyboardBackspace';
+import { KeyboardBackspace, ExitToApp } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
 import Bands from './Bands';
 import { requestGet, requestPostHeaders } from '../../hooks/useRequest';
@@ -34,8 +33,9 @@ function BandApprove() {
     }
 
     useEffect(() => {
+        localStorage.getItem("token") === null && history.push("/");
         getBands();
-    }, [setBands])
+    }, [setBands, history])
 
     const getBands = async () => {
         //TODO: erro jwt expired aqui, como verificar isso
@@ -77,7 +77,8 @@ function BandApprove() {
             for (let b of bandsToApprove) {
                 result = await requestPostHeaders("user/approve", { "nickname": b.nickname })
             }
-            if (result.res === "Approved!") {
+
+            if (result.res === "Band approved!") {
                 window.alert("Banda(s) aprovada(s)!")
             }
             getBands()

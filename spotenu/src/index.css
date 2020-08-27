@@ -27,6 +27,8 @@ body button {
   text-decoration: none;
   border: none;
   height: 40px;
+  cursor: pointer;
+  font-size: 15px;
 }
 
 body input, select {
