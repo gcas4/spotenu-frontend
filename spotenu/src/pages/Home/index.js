@@ -1,47 +1,65 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import ExitToApp from '@material-ui/icons/ExitToApp';
-import MusicNote from '@material-ui/icons/MusicNote';
-import PersonAdd from '@material-ui/icons/PersonAdd';
+import Header from '../../components/Header';
 import { useHistory } from 'react-router-dom';
+import Menu from '../../components/Menu';
+import { isMobile } from '../../utils/isMobile';
 
 const HomeWrapper = styled.div`
-    display: grid;
-    gap: 32px;
-    padding-top: 32px;
-    padding: 16px;
-`;
-
-const Header = styled.header`
-    width: 100%;
+    background-color: gray;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
+    flex-grow: 1;
 `;
 
-const H1 = styled.label`
-    font-size: 40px;
+const CondicionalMenu = styled.div`
+    display: flex;
+`;
+
+const Principal = styled.div`
+    background-color: pink;
+    padding: 16px 40px;
+    display: flex;
+    flex-grow: 1;
+`;
+
+const Content = styled.div`
+    display: flex;
+    flex-grow: 1;
 `;
 
 function Home() {
     const history = useHistory();
+    const [menu, setMenu] = useState(true);
+    let visibleMenu
 
     useEffect(() => {
         localStorage.getItem("token") === null && history.push("/");
-    }, [history])
+        setMenu(!isMobile());
 
-    const onLogout = () => {
-        localStorage.clear();
-        history.push("/")
+    }, [history, setMenu])
+
+    const openMenu = () => {
+        setMenu(!menu)
+    }
+
+    if (menu) {
+        visibleMenu = (<Menu />)
+    } else {
+        visibleMenu = <div></div>
     }
 
     return (
         <HomeWrapper>
-            <Header>
-                <MusicNote onClick={() => history.push("/admin/approve")} />
-                <PersonAdd onClick={() => history.push("/signup/admin")} />
-                <ExitToApp onClick={onLogout} />
-            </Header>
-            <H1>Home</H1>
+            <Header openMenu={openMenu} />
+            <Content>
+                <CondicionalMenu>
+                    {visibleMenu}
+                </CondicionalMenu>
+                <Principal>
+                </Principal>
+            </Content>
         </HomeWrapper>
     );
 }

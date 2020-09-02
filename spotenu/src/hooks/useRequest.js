@@ -15,7 +15,6 @@ export const requestPost = async (url, body) => {
 }
 
 export const requestPostHeaders = async (url, body) => {
-    
     try {
         const result = await axios.post(`${baseUrl}${url}`, body, {
             headers: { "Authorization": localStorage.getItem("token") }
@@ -24,6 +23,7 @@ export const requestPostHeaders = async (url, body) => {
         return { res: result.data.message, message: "ok" }
 
     } catch (e) {
+        console.log(e)
         window.alert(e.response.data.error)
         return { res: e.response.data.error, message: "error" }
     }
@@ -39,6 +39,11 @@ export const requestGet = async (url) => {
 
     } catch (e) {
         window.alert(e.response.data.error) || window.alert(e)
+
+        if(e.response.data.error === "jwt expired"){
+            return "jwt expired";
+        }
+
         return e.response.data.error ?
             { res: e.response.data.error, message: "error" }
             : e

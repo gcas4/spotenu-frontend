@@ -11,8 +11,13 @@ import Login from './pages/Login'
 import BandApprove from './pages/BandApprove'
 
 const IndexWrapper = styled.div`
-  width: 100vw;
-  max-width: 400px;
+  min-height: 100vh;
+  /* width: 100vw; */
+  /* background-color: red; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Page404 = () => <div>Page 404 Not Found</div>

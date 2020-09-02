@@ -1,45 +1,57 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { KeyboardBackspace, ExitToApp } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
 import Bands from './Bands';
 import { requestGet, requestPostHeaders } from '../../hooks/useRequest';
+import { Wrapper } from '../../style/forms';
+import Header from '../../components/Header';
+import { useMenu } from '../../hooks/useMenu';
+import Nav from '../../components/Nav';
 
 const BandApproveWrapper = styled.div`
-    padding-top: 32px;
-    display: grid;
-    gap: 32px;
-    padding: 16px;
-`;
-
-const Header = styled.header`
-    width: 100%;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
+    flex-grow: 1;
 `;
 
-const H1 = styled.label`
-    font-size: 32px;
+const Principal = styled.div`
+    width: 100%;
+    background-color: pink;
+    padding: 16px 40px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media screen and (max-width: 700px) {
+        padding: 16px;
+    }
+`;
+
+const Content = styled.div`
+    display: flex;
+    flex-grow: 1;
+`;
+
+const FormTitle = styled.label`
+    font-size: 24px;
+    margin-bottom: 16px;
 `;
 
 function BandApprove() {
-    const history = useHistory();
+    const { condicionalMenu, openMenu } = useMenu();
     const [bands, setBands] = useState([]);
     let noBandsToApproveMessage;
 
-    const onLogout = () => {
-        localStorage.clear();
-        history.push("/");
-    }
-
     useEffect(() => {
-        localStorage.getItem("token") === null && history.push("/");
         getBands();
-    }, [setBands, history])
+    }, [setBands])
 
     const getBands = async () => {
         //TODO: erro jwt expired aqui, como verificar isso
         const bands = await requestGet("user/bands");
+
         if (bands.length !== 0) {
             const bandsToApprove = bands.res
                 .filter(b => b.isApproved === false)
@@ -62,9 +74,7 @@ function BandApprove() {
 
         setBands(bandsChecked);
     }
-    //TODO: fazer carregamento das páginas, esperando resposta das requisições
-    // colocar styled-components em outro arquivo
-    // o que fazer quando jwt expired
+
     const approveBands = async () => {
         let result
         let bandsToApprove
@@ -91,18 +101,23 @@ function BandApprove() {
 
     return (
         <BandApproveWrapper>
-            <Header>
-                <KeyboardBackspace onClick={() => history.push("/home")} />
-                <ExitToApp onClick={onLogout} />
-            </Header>
-            <H1>Bandas para aprovar</H1>
-            <Bands
-                bands={bands}
-                setBands={setBands}
-                handleInputChange={handleInputChange}
-            />
-            {noBandsToApproveMessage}
-            <button onClick={approveBands}>APROVAR</button>
+            <Header openMenu={openMenu} />
+            <Content>
+                {condicionalMenu}
+                <Principal>
+                    <Nav />
+                    <Wrapper>
+                        <FormTitle>Bandas para aprovar</FormTitle>
+                        <Bands
+                            bands={bands}
+                            setBands={setBands}
+                            handleInputChange={handleInputChange}
+                        />
+                        {noBandsToApproveMessage}
+                        <button onClick={approveBands}>APROVAR</button>
+                    </Wrapper>
+                </Principal>
+            </Content>
         </BandApproveWrapper>
     );
 }
