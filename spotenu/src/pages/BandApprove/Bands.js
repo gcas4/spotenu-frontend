@@ -5,7 +5,6 @@ const SelectAllButton = styled.button`
     color: black;
     background-color: transparent;
     margin-right: auto;
-    font-size: 20px;
 `;
 
 const EachBand = styled.div`
@@ -26,7 +25,6 @@ function Bands({ bands, setBands, handleInputChange }) {
     const [checkAll, setCheckAll] = useState(true);
 
     const selectAll = () => {
-        //TODO se todos checkboxs estiverem true, ao clicar em 'Selecionar todos', vão para false.
         const bandsChecked = bands.map(b => {
             b.isChecked = checkAll;
             return b;

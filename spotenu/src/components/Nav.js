@@ -7,6 +7,7 @@ const NavWrapper = styled.nav`
     width: 100%;
     display: flex;
     justify-content: space-between;
+    cursor: pointer;
 `;
 
 function Nav() {

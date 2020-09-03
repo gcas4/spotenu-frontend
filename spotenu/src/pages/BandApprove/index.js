@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
 import Bands from './Bands';
-import { requestGet, requestPostHeaders } from '../../hooks/useRequest';
+import { requestPost, baseUrl } from '../../hooks/useRequest';
 import { Wrapper } from '../../style/forms';
 import Header from '../../components/Header';
 import { useMenu } from '../../hooks/useMenu';
 import Nav from '../../components/Nav';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 const BandApproveWrapper = styled.div`
     display: flex;
@@ -40,6 +41,7 @@ const FormTitle = styled.label`
 `;
 
 function BandApprove() {
+    const history = useHistory();
     const { condicionalMenu, openMenu } = useMenu();
     const [bands, setBands] = useState([]);
     let noBandsToApproveMessage;
@@ -49,11 +51,12 @@ function BandApprove() {
     }, [setBands])
 
     const getBands = async () => {
-        //TODO: erro jwt expired aqui, como verificar isso
-        const bands = await requestGet("user/bands");
+        try {
+            const result = await axios.get(`${baseUrl}user/bands`, {
+                headers: { "Authorization": localStorage.getItem("token") }
+            })
 
-        if (bands.length !== 0) {
-            const bandsToApprove = bands.res
+            const bandsToApprove = result.data.bands
                 .filter(b => b.isApproved === false)
                 .map(b => {
                     const bands = { ...b, isChecked: false }
@@ -61,6 +64,14 @@ function BandApprove() {
                 });
 
             setBands(bandsToApprove);
+
+        } catch (e) {
+            console.log("e: ", e)
+            if (e.response.data.error === "jwt expired" || e.response.data.error === "jwt malformed") {
+                localStorage.clear();
+                history.push("/");
+            }
+            window.alert(e.response.data.error) || window.alert(e)
         }
     }
 
@@ -85,7 +96,7 @@ function BandApprove() {
 
         if (bandsToApprove) {
             for (let b of bandsToApprove) {
-                result = await requestPostHeaders("user/approve", { "nickname": b.nickname })
+                result = await requestPost("user/approve", { "nickname": b.nickname })
             }
 
             if (result.res === "Band approved!") {

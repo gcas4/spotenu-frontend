@@ -19,12 +19,11 @@ function Login() {
     const handleSubmit = async e => {
         e.preventDefault();
         const response = await requestPost("user/login", form);
+        resetValues();
 
         if (response.message === "ok") {
             history.push("/home");
         }
-
-        resetValues();
     }
 
     return (

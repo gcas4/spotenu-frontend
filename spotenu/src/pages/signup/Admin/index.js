@@ -1,11 +1,11 @@
 import React from 'react';
 import { useForm } from '../../../hooks/useForm';
 import { useMenu } from '../../../hooks/useMenu';
-import { requestPostHeaders } from '../../../hooks/useRequest';
+import { requestPost } from '../../../hooks/useRequest';
 import Header from '../../../components/Header';
 import Nav from '../../../components/Nav';
 import styled from 'styled-components';
-import { Wrapper, InputWrapper } from '../../../style/forms';
+import { FormWrapper, InputWrapper } from '../../../style/forms';
 
 const SingupAdminWrapper = styled.div`
     display: flex;
@@ -63,7 +63,7 @@ function AdminSignup() {
     const handleSubmit = async e => {
         e.preventDefault();
 
-        const response = await requestPostHeaders("user/signup", form)
+        const response = await requestPost("user/signup", form)
 
         if (response.message === "ok") {
             window.alert("Admin cadastrado!");
@@ -79,7 +79,7 @@ function AdminSignup() {
                 <Principal>
                     <Nav />
                     <CenteringForm>
-                        <Wrapper onSubmit={handleSubmit}>
+                        <FormWrapper onSubmit={handleSubmit}>
                             <FormTitle>Cadastro de admin</FormTitle>
                             <InputWrapper>
                                 <label>Nome:</label>
@@ -122,7 +122,7 @@ function AdminSignup() {
                                 />
                             </InputWrapper>
                             <button>CADASTRAR</button>
-                        </Wrapper>
+                        </FormWrapper>
                     </CenteringForm>
                 </Principal>
             </Content>

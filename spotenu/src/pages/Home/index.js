@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Header from '../../components/Header';
-import { useHistory } from 'react-router-dom';
-import Menu from '../../components/Menu';
-import { isMobile } from '../../utils/isMobile';
+import { useMenu } from '../../hooks/useMenu';
 
 const HomeWrapper = styled.div`
     background-color: gray;
@@ -11,10 +9,6 @@ const HomeWrapper = styled.div`
     flex-direction: column;
     width: 100%;
     flex-grow: 1;
-`;
-
-const CondicionalMenu = styled.div`
-    display: flex;
 `;
 
 const Principal = styled.div`
@@ -30,33 +24,13 @@ const Content = styled.div`
 `;
 
 function Home() {
-    const history = useHistory();
-    const [menu, setMenu] = useState(true);
-    let visibleMenu
-
-    useEffect(() => {
-        localStorage.getItem("token") === null && history.push("/");
-        setMenu(!isMobile());
-
-    }, [history, setMenu])
-
-    const openMenu = () => {
-        setMenu(!menu)
-    }
-
-    if (menu) {
-        visibleMenu = (<Menu />)
-    } else {
-        visibleMenu = <div></div>
-    }
+    const { condicionalMenu, openMenu } = useMenu();
 
     return (
         <HomeWrapper>
             <Header openMenu={openMenu} />
             <Content>
-                <CondicionalMenu>
-                    {visibleMenu}
-                </CondicionalMenu>
+                {condicionalMenu}
                 <Principal>
                 </Principal>
             </Content>

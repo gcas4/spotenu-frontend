@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from '../../../hooks/useForm';
-import { requestPostHeaders } from '../../../hooks/useRequest';
+import { requestPost } from '../../../hooks/useRequest';
 import { FormWrapper, ChangeWrapper, InputWrapper, H1, Button } from '../../../style/forms';
 
 function BandListenerSignup() {
@@ -44,7 +44,7 @@ function BandListenerSignup() {
         const role = roleSelectToSend(form.role);
         body = { ...form, role: role };
 
-        const response = await requestPostHeaders("user/signup", body)
+        const response = await requestPost("user/signup", body)
 
         if (response.message === "ok") {
             window.alert(`${form.role} cadastrado(a) com sucesso!`);

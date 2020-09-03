@@ -10,7 +10,7 @@ const HeaderWrapper = styled.header`
     align-items: center;
     width: 100%;
     text-align: right;
-    background: black;
+    background: rgba(0, 0, 0, 0.9);;
     color: white;
     padding: 0 16px;
     box-sizing: border-box;
@@ -18,10 +18,16 @@ const HeaderWrapper = styled.header`
 
 const MenuIconStyled = styled.div`
     display: none;
+    cursor: pointer;
 
     @media screen and (max-width: 700px){
         display: inline;
     } 
+`;
+
+const Button = styled.button`
+    color: white;
+    background: transparent;
 `;
 
 const H1 = styled.label`
@@ -42,7 +48,7 @@ function Header({ openMenu }) {
                 <MenuIcon onClick={openMenu} />
             </MenuIconStyled>
             <H1>Spotenu</H1>
-            <label onClick={onLogout}>LOGOUT</label>
+            <Button onClick={onLogout}>LOGOUT</Button>
         </HeaderWrapper>
     );
 }

@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 const MenuWrapper = styled.div`
     width: 150px;
     flex-grow: 1;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.9);
     color: white;
     padding: 16px;
 
@@ -23,12 +23,9 @@ const ButtonsWrapper = styled.div`
 `;
 
 const Button = styled.button`
-    width: auto;
     height: auto;
-    color: white;
     text-align: left;
     background: transparent;
-    font-weight: lighter;
     cursor: pointer;
 `;
 
