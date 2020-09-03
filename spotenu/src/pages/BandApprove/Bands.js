@@ -1,25 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-
-const SelectAllButton = styled.button`
-    color: black;
-    background-color: transparent;
-    margin-right: auto;
-`;
-
-const EachBand = styled.div`
-    display: flex;
-    align-items: center;
-`;
-
-const BandsForm = styled.div`
-    display: grid;
-    gap: 8px;
-`;
-
-const BandName = styled.label`
-    padding-left: 8px;
-`;
+import { SelectAllButton, EachBand, BandsForm, BandName } from './style';
 
 function Bands({ bands, setBands, handleInputChange }) {
     const [checkAll, setCheckAll] = useState(true);

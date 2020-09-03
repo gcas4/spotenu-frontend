@@ -34,7 +34,7 @@ const H1 = styled.label`
     font-size: 24px;
 `;
 
-function Header({ openMenu }) {
+function Header({ openLateralMenu }) {
     const history = useHistory();
 
     const onLogout = () => {
@@ -45,7 +45,7 @@ function Header({ openMenu }) {
     return (
         <HeaderWrapper>
             <MenuIconStyled>
-                <MenuIcon onClick={openMenu} />
+                <MenuIcon onClick={openLateralMenu} />
             </MenuIconStyled>
             <H1>Spotenu</H1>
             <Button onClick={onLogout}>LOGOUT</Button>

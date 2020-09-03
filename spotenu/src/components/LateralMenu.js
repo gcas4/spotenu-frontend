@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
-const MenuWrapper = styled.div`
+const LateralMenuWrapper = styled.div`
     width: 150px;
     flex-grow: 1;
     background-color: rgba(0, 0, 0, 0.9);
@@ -29,17 +29,17 @@ const Button = styled.button`
     cursor: pointer;
 `;
 
-function Menu() {
+function LateralMenu() {
     const history = useHistory();
 
     return (
-        <MenuWrapper>
+        <LateralMenuWrapper>
             <ButtonsWrapper>
                 <Button onClick={() => history.push("/admin/approve")}>APROVAR BANDAS</Button>
                 <Button onClick={() => history.push("/signup/admin")}>CADASTRAR ADMIN</Button>
             </ButtonsWrapper>
-        </MenuWrapper>
+        </LateralMenuWrapper>
     );
 }
 
-export default Menu;
+export default LateralMenu;
