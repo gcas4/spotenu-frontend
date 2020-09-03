@@ -1,30 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
-import { useForm } from '../../../hooks/useForm';
-import { requestPostHeaders } from '../../../hooks/useRequest';
 import { useHistory } from 'react-router-dom';
-
-const SignupWrapper = styled.form`
-    display: grid;
-    gap: 16px;
-    padding-top: 32px;
-    padding: 16px;
-`;
-
-const InputWrapper = styled.div`
-    display: grid;
-    gap: 8px;
-`;
-
-const Button = styled.button`
-    color: black;
-    background: white;
-    border: 1px solid black;
-`;
+import { useForm } from '../../../hooks/useForm';
+import { requestPost } from '../../../hooks/useRequest';
+import { FormWrapper, ChangeWrapper, InputWrapper, H1, Button } from '../../../style/forms';
 
 function BandListenerSignup() {
     const history = useHistory();
-    const { form, onChange, resetValues } = useForm({
+    const { form, onChange } = useForm({
         role: "",
         name: "",
         nickname: "",
@@ -38,6 +20,19 @@ function BandListenerSignup() {
         onChange(name, value);
     }
 
+    const roleSelectToSend = (roleSelected) => {
+        switch (roleSelected) {
+            case "Ouvinte pagante":
+                return "PAYING";
+            case "Ouvinte não pagante":
+                return "NORMAL";
+            case "Banda":
+                return "BAND";
+            default:
+                return "NORMAL";
+        }
+    }
+
     const handleSubmit = async e => {
         e.preventDefault();
         let body = form;
@@ -46,17 +41,20 @@ function BandListenerSignup() {
             body = { ...form, description: "" };
         }
 
-        const response = await requestPostHeaders("user/signup", body)
+        const role = roleSelectToSend(form.role);
+        body = { ...form, role: role };
+
+        const response = await requestPost("user/signup", body)
 
         if (response.message === "ok") {
             window.alert(`${form.role} cadastrado(a) com sucesso!`);
-            resetValues();
+            history.push("/");
         }
     }
 
     let description
 
-    if (form.role === "BAND") {
+    if (form.role === "Banda") {
         description = (
             <InputWrapper>
                 <label>Descrição:</label>
@@ -72,13 +70,17 @@ function BandListenerSignup() {
     }
 
     return (
-        <SignupWrapper onSubmit={handleSubmit}>
-            <select name={"role"} value={form.role} onChange={handleInputChange}>
-                <option value={""}>Selecione o papel</option>
-                <option value={"NORMAL"}>NORMAL</option>
-                <option value={"PAYING"}>PAYING</option>
-                <option value={"BAND"}>BAND</option>
-            </select>
+        <FormWrapper onSubmit={handleSubmit}>
+            <H1>Spotenu</H1>
+            <InputWrapper>
+                <label>Papel:</label>
+                <select name={"role"} value={form.role} onChange={handleInputChange}>
+                    <option value={""}>Selecione o papel</option>
+                    <option value={"Ouvinte não pagante"}>Ouvinte não pagante</option>
+                    <option value={"Ouvinte pagante"}>Ouvinte pagante</option>
+                    <option value={"Banda"}>Banda</option>
+                </select>
+            </InputWrapper>
             <InputWrapper>
                 <label>Nome:</label>
                 <input
@@ -121,8 +123,11 @@ function BandListenerSignup() {
                 />
             </InputWrapper>
             <button>CADASTRAR</button>
-            <Button onClick={() => history.push("/")}>VOLTAR</Button>
-        </SignupWrapper >
+            <ChangeWrapper>
+                <label>Já possui cadastro? </label>
+                <Button onClick={() => history.push("/")}>LOGIN</Button>
+            </ChangeWrapper>
+        </FormWrapper >
     );
 }
 

@@ -1,29 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import { requestPost } from '../../hooks/useRequest';
-
-const LoginWrapper = styled.form`
-    display: grid;
-    gap: 16px;
-    padding-top: 32px;
-    padding: 16px;
-`;
-
-const InputWrapper = styled.div`
-    display: grid;
-    gap: 8px;
-`;
-
-const Button = styled.button`
-    color: black;
-    background: white;
-`;
+import { FormWrapper, ChangeWrapper, InputWrapper, H1, Button } from '../../style/forms';
 
 function Login() {
     const history = useHistory();
-    const { form, onChange } = useForm({
+    const { form, onChange, resetValues } = useForm({
         nicknameOrEmail: "",
         password: ""
     })
@@ -36,6 +19,7 @@ function Login() {
     const handleSubmit = async e => {
         e.preventDefault();
         const response = await requestPost("user/login", form);
+        resetValues();
 
         if (response.message === "ok") {
             history.push("/home");
@@ -43,11 +27,12 @@ function Login() {
     }
 
     return (
-        <LoginWrapper onSubmit={handleSubmit}>
+        <FormWrapper onSubmit={handleSubmit}>
+            <H1>Spotenu</H1>
             <InputWrapper>
-                <label>Login:</label>
+                <label>Email ou nickname:</label>
                 <input
-                    placeholder={"Nickname ou email"}
+                    placeholder={"Email ou nickname"}
                     onChange={handleInputChange}
                     value={form.nicknameOrEmail}
                     name={"nicknameOrEmail"}
@@ -65,11 +50,11 @@ function Login() {
                 />
             </InputWrapper>
             <button>ENTRAR</button>
-            <div>
-                <label>Não possui cadastro... </label>
+            <ChangeWrapper>
+                <label>Não possui cadastro? </label>
                 <Button onClick={() => history.push("/signup")}>CADASTRE-SE</Button>
-            </div>
-        </LoginWrapper>
+            </ChangeWrapper>
+        </FormWrapper>
     );
 }
 

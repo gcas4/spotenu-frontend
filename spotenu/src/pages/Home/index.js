@@ -1,47 +1,39 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import ExitToApp from '@material-ui/icons/ExitToApp';
-import MusicNote from '@material-ui/icons/MusicNote';
-import PersonAdd from '@material-ui/icons/PersonAdd';
-import { useHistory } from 'react-router-dom';
+import Header from '../../components/Header';
+import { useMenu } from '../../hooks/useMenu';
 
 const HomeWrapper = styled.div`
-    display: grid;
-    gap: 32px;
-    padding-top: 32px;
-    padding: 16px;
-`;
-
-const Header = styled.header`
-    width: 100%;
+    background-color: gray;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
+    flex-grow: 1;
 `;
 
-const H1 = styled.label`
-    font-size: 40px;
+const Principal = styled.div`
+    background-color: pink;
+    padding: 16px 40px;
+    display: flex;
+    flex-grow: 1;
+`;
+
+const Content = styled.div`
+    display: flex;
+    flex-grow: 1;
 `;
 
 function Home() {
-    const history = useHistory();
-
-    useEffect(() => {
-        localStorage.getItem("token") === null && history.push("/");
-    }, [history])
-
-    const onLogout = () => {
-        localStorage.clear();
-        history.push("/")
-    }
+    const { condicionalMenu, openMenu } = useMenu();
 
     return (
         <HomeWrapper>
-            <Header>
-                <MusicNote onClick={() => history.push("/admin/approve")} />
-                <PersonAdd onClick={() => history.push("/signup/admin")} />
-                <ExitToApp onClick={onLogout} />
-            </Header>
-            <H1>Home</H1>
+            <Header openMenu={openMenu} />
+            <Content>
+                {condicionalMenu}
+                <Principal>
+                </Principal>
+            </Content>
         </HomeWrapper>
     );
 }

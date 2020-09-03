@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const SelectAllButton = styled.button`
     color: black;
-    background: white;
+    background-color: transparent;
     margin-right: auto;
-    font-size: 20px;
 `;
 
 const EachBand = styled.div`
@@ -26,7 +25,6 @@ function Bands({ bands, setBands, handleInputChange }) {
     const [checkAll, setCheckAll] = useState(true);
 
     const selectAll = () => {
-        //TODO se todos checkboxs estiverem true, ao clicar em 'Selecionar todos', vão para false.
         const bandsChecked = bands.map(b => {
             b.isChecked = checkAll;
             return b;
@@ -38,7 +36,7 @@ function Bands({ bands, setBands, handleInputChange }) {
 
     return (
         <BandsForm>
-            <SelectAllButton as="label" onClick={selectAll}>Selecionar todas</SelectAllButton>
+            <SelectAllButton onClick={selectAll}>SELECIONAR TODAS</SelectAllButton>
             {bands && bands.map(b => {
                 return (
                     <EachBand key={b.name}>
