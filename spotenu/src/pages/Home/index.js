@@ -1,36 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
 import Header from '../../components/Header';
-import { useMenu } from '../../hooks/useMenu';
-
-const HomeWrapper = styled.div`
-    background-color: gray;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    flex-grow: 1;
-`;
-
-const Principal = styled.div`
-    background-color: pink;
-    padding: 16px 40px;
-    display: flex;
-    flex-grow: 1;
-`;
-
-const Content = styled.div`
-    display: flex;
-    flex-grow: 1;
-`;
+import { useLateralMenu } from '../../hooks/useLateralMenu';
+import { HomeWrapper, Principal, Content } from './style';
 
 function Home() {
-    const { condicionalMenu, openMenu } = useMenu();
+    const { conditionalLateralMenu, openLateralMenu } = useLateralMenu();
 
     return (
         <HomeWrapper>
-            <Header openMenu={openMenu} />
+            <Header openLateralMenu={openLateralMenu} />
             <Content>
-                {condicionalMenu}
+                {conditionalLateralMenu}
                 <Principal>
                 </Principal>
             </Content>

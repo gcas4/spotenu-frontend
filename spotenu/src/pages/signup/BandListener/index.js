@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from '../../../hooks/useForm';
-import { requestPost } from '../../../hooks/useRequest';
+import { requestPost } from '../../../hooks/useRequestData';
 import { FormWrapper, ChangeWrapper, InputWrapper, H1, Button } from '../../../style/forms';
 
 function BandListenerSignup() {
