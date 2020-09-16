@@ -1,23 +1,19 @@
 import React, { useEffect } from 'react';
 import Bands from './Bands';
-import Header from '../../components/Header';
-import Nav from '../../components/Nav';
-import { useRequestData, requestPost } from '../../hooks/useRequestData';
+import HeaderAdmin from '../../components/HeaderAdmin';
+import { useRequestData } from '../../hooks/useRequestData';
+import { useRequestPost } from '../../hooks/useRequestPost';
 import { Wrapper } from '../../style/forms';
 import { useLateralMenu } from '../../hooks/useLateralMenu';
 import { BandApproveWrapper, Principal, Content, FormTitle } from './style';
 
 function BandApprove() {
-    const { conditionalLateralMenu, openLateralMenu } = useLateralMenu();
+    const { conditionalLateralMenu, openLateralMenu } = useLateralMenu("ADMIN");
     const { data, setData, getData } = useRequestData("user/bands", [])
     let noBandsToApproveMessage;
+    const { makeRequest } = useRequestPost();
 
     useEffect(() => {
-        addIsCheckedToBands();
-    }, [data, setData])
-
-    const addIsCheckedToBands = async () => {
-
         if (data.bands) {
             const bandsToApprove = data.bands
                 .filter(b => b.isApproved === false)
@@ -28,7 +24,7 @@ function BandApprove() {
 
             setData(bandsToApprove);
         }
-    }
+    }, [data, setData])
 
     const handleInputChange = e => {
         const bandsChecked = data.map(b => {
@@ -42,34 +38,28 @@ function BandApprove() {
     }
 
     const approveBands = async () => {
-        let result;
         let bandsToApprove = [];
 
         bandsToApprove = data.filter(b => b.isChecked);
 
         if (bandsToApprove.length !== 0) {
             for (let b of bandsToApprove) {
-                result = await requestPost("user/approve", { "nickname": b.nickname })
-            }
-
-            if (result.res === "Band approved!") {
-                window.alert("Banda(s) aprovada(s)!");
+                await makeRequest("user/approve", { "nickname": b.nickname }, "/admin/approve")
             }
             getData();
         }
     }
 
-    if ((!data) || data.length == 0) {
+    if ((!data) || data.length === 0) {
         noBandsToApproveMessage = (<label>Nenhuma banda para aprovar</label>)
     }
 
     return (
         <BandApproveWrapper>
-            <Header openLateralMenu={openLateralMenu} />
+            <HeaderAdmin openLateralMenu={openLateralMenu} />
             <Content>
                 {conditionalLateralMenu}
                 <Principal>
-                    <Nav />
                     <Wrapper>
                         <FormTitle>Bandas para aprovar</FormTitle>
                         {!data.bands &&
