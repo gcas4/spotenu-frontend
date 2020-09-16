@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
-import { requestPost } from '../../hooks/useRequestData';
+import { useRequestPost } from '../../hooks/useRequestPost';
 import { FormWrapper, ChangeWrapper, InputWrapper, H1, Button } from '../../style/forms';
 
 function Login() {
     const history = useHistory();
-    const { form, onChange, resetValues } = useForm({
+    const { form, onChange } = useForm({
         nicknameOrEmail: "",
         password: ""
     })
+    const { makeRequest, role } = useRequestPost();
+
+    useEffect(() => {
+        if (role === "ADMIN") {
+            history.push("/admin/home");
+        }
+        if (role === "BAND") {
+            history.push("/band/home");
+        }
+    }, [role, history])
 
     const handleInputChange = e => {
         const { name, value } = e.target;
@@ -18,12 +28,7 @@ function Login() {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        const response = await requestPost("user/login", form);
-        resetValues();
-
-        if (response.message === "ok") {
-            history.push("/home");
-        }
+        await makeRequest("user/login", form, "/home");
     }
 
     return (

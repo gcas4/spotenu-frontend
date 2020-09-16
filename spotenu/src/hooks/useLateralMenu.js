@@ -8,7 +8,7 @@ const ConditionalLateralMenu = styled.div`
     display: flex;
 `;
 
-export const useLateralMenu = () => {
+export const useLateralMenu = ( role ) => {
     const history = useHistory();
     const [lateralMenu, setLateralMenu] = useState(true);
     let visibleLateralMenu;
@@ -23,7 +23,7 @@ export const useLateralMenu = () => {
     }
 
     if (lateralMenu) {
-        visibleLateralMenu = (<LateralMenu />)
+        visibleLateralMenu = (<LateralMenu role={role} />)
     } else {
         visibleLateralMenu = <div></div>
     }

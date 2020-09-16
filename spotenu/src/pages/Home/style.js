@@ -6,6 +6,7 @@ export const HomeWrapper = styled.div`
     flex-direction: column;
     width: 100%;
     flex-grow: 1;
+    overflow-y: hidden;
 `;
 
 export const Principal = styled.div`

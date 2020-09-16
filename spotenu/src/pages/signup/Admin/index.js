@@ -1,14 +1,13 @@
 import React from 'react';
 import { useForm } from '../../../hooks/useForm';
 import { useLateralMenu } from '../../../hooks/useLateralMenu';
-import { requestPost } from '../../../hooks/useRequestData';
-import Header from '../../../components/Header';
-import Nav from '../../../components/Nav';
+import { useRequestPost } from '../../../hooks/useRequestPost';
+import HeaderAdmin from '../../../components/HeaderAdmin';
 import { FormWrapper, InputWrapper } from '../../../style/forms';
-import {SingupAdminWrapper, Principal, Content, CenteringForm, FormTitle} from './style';
+import { SingupAdminWrapper, Principal, Content, CenteringForm, FormTitle } from './style';
 
 function AdminSignup() {
-    const { conditionalLateralMenu, openLateralMenu } = useLateralMenu();
+    const { conditionalLateralMenu, openLateralMenu } = useLateralMenu("ADMIN");
     const { form, onChange, resetValues } = useForm({
         name: "",
         nickname: "",
@@ -16,6 +15,7 @@ function AdminSignup() {
         password: "",
         role: "ADMIN"
     })
+    const { makeRequest } = useRequestPost();
 
     const handleInputChange = e => {
         const { name, value } = e.target;
@@ -25,21 +25,16 @@ function AdminSignup() {
     const handleSubmit = async e => {
         e.preventDefault();
 
-        const response = await requestPost("user/signup", form)
-
-        if (response.message === "ok") {
-            window.alert("Admin cadastrado!");
-            resetValues();
-        }
+        await makeRequest("user/signup", form, "/signup/admin");
+        resetValues();
     }
 
     return (
         <SingupAdminWrapper>
-            <Header openLateralMenu={openLateralMenu} />
+            <HeaderAdmin openLateralMenu={openLateralMenu} />
             <Content>
                 {conditionalLateralMenu}
                 <Principal>
-                    <Nav />
                     <CenteringForm>
                         <FormWrapper onSubmit={handleSubmit}>
                             <FormTitle>Cadastro de admin</FormTitle>

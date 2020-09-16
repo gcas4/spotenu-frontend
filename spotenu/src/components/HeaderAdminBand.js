@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-import MenuIcon from '@material-ui/icons/Menu';
 
 const HeaderWrapper = styled.header`
     height: 50px;
@@ -16,25 +15,20 @@ const HeaderWrapper = styled.header`
     box-sizing: border-box;
 `;
 
-const MenuIconStyled = styled.div`
-    display: none;
-    cursor: pointer;
-
-    @media screen and (max-width: 700px){
-        display: inline;
-    } 
-`;
-
 const Button = styled.button`
     color: white;
     background: transparent;
 `;
 
-const H1 = styled.label`
+const TitleApp = styled.label`
     font-size: 24px;
+    position: sticky;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
 `;
 
-function Header({ openLateralMenu }) {
+function HeaderAdminBand() {
     const history = useHistory();
 
     const onLogout = () => {
@@ -44,13 +38,10 @@ function Header({ openLateralMenu }) {
 
     return (
         <HeaderWrapper>
-            <MenuIconStyled>
-                <MenuIcon onClick={openLateralMenu} />
-            </MenuIconStyled>
-            <H1>Spotenu</H1>
+            <TitleApp>Spotenu</TitleApp>
             <Button onClick={onLogout}>LOGOUT</Button>
         </HeaderWrapper>
     );
 }
 
-export default Header;
+export default HeaderAdminBand;

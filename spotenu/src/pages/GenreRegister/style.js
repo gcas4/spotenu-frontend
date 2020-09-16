@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const BandApproveWrapper = styled.div`
+export const GenreRegisterWrapper = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -27,27 +27,14 @@ export const Content = styled.div`
     flex-grow: 1;
 `;
 
-export const FormTitle = styled.label`
-    font-size: 24px;
-    margin-bottom: 16px;
-`;
-
-export const SelectAllButton = styled.button`
-    color: black;
-    background-color: transparent;
-    margin-right: auto;
-`;
-
-export const EachBand = styled.div`
+export const CenteringForm = styled.div`
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
 `;
 
-export const BandsForm = styled.div`
-    display: grid;
-    gap: 8px;
-`;
-
-export const BandName = styled.label`
-    padding-left: 8px;
+export const FormTitle = styled.label`
+    font-size: 24px;
+    margin-bottom: 16px;
 `;
