@@ -19,6 +19,9 @@ function Login() {
         if (role === "BAND") {
             history.push("/band/home");
         }
+        if (role === "PAYING" || role === "NORMAL") {
+            history.push("/home");
+        }
     }, [role, history])
 
     const handleInputChange = e => {
@@ -28,7 +31,7 @@ function Login() {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        await makeRequest("user/login", form, "/home");
+        await makeRequest("user/login", form, "login");
     }
 
     return (

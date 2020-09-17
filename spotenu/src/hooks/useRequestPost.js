@@ -12,16 +12,12 @@ export const useRequestPost = () => {
             const result = await axios.post(`${baseUrl}${url}`, body, {
                 headers: { "Authorization": localStorage.getItem("token") }
             })
-
-            const token = localStorage.getItem("token")
-
-            if (token) {
-                history.push(path);
-            }
-
-            if (!token) {
+            if (path === "login") {
+                localStorage.clear();
                 localStorage.setItem("token", result.data.token)
                 setRole(result.data.role);
+            } else {
+                history.push(path);
             }
         } catch (e) {
             if (e.response.data.error === "jwt expired" || e.response.data.error === "jwt malformed") {

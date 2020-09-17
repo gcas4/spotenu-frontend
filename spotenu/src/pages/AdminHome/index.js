@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 `;
 
 const PagesWrapper = styled.div`
-    width: 60%;
+    width: 75%;
     flex-grow: 1;
     display: flex;
     justify-content: center;
