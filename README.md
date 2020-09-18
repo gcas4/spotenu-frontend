@@ -10,12 +10,13 @@ O backend pode ser acessado aqui: [Spotenu-Backend](https://github.com/gcas4/spo
 [spotenug.surge.sh](spotenug.surge.sh)
 
 ## Funcionalidades
-[x] Cadastrar usuário (ouvinte, pagante, banda e admin);\
-[x] Login;\
-[x] Aprovar bandas com checkbox;\
-[x] Cadastrar gênero musical;\
-[ ] Cadastrar álbum;\
-[ ] Cadastrar música;
+
+- [x] Cadastrar usuário (ouvinte, pagante, banda e admin);\
+- [x] Login;\
+- [x] Aprovar bandas com checkbox;\
+- [x] Cadastrar gênero musical;\
+- [ ] Cadastrar álbum;\
+- [ ] Cadastrar música.
 
 ## Como rodar a aplicação
 No terminal, execute os comandos abaixo:
