@@ -11,11 +11,11 @@ O backend pode ser acessado aqui: [Spotenu-Backend](https://github.com/gcas4/spo
 
 ## Funcionalidades
 
-- [x] Cadastrar usuário (ouvinte, pagante, banda e admin);\
-- [x] Login;\
-- [x] Aprovar bandas com checkbox;\
-- [x] Cadastrar gênero musical;\
-- [ ] Cadastrar álbum;\
+- [x] Cadastrar usuário (ouvinte, pagante, banda e admin);
+- [x] Login;
+- [x] Aprovar bandas com checkbox;
+- [x] Cadastrar gênero musical;
+- [ ] Cadastrar álbum;
 - [ ] Cadastrar música.
 
 ## Como rodar a aplicação
