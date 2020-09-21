@@ -3,6 +3,9 @@ import HeaderAdmin from '../../components/HeaderAdmin';
 import { useLateralMenu } from '../../hooks/useLateralMenu';
 import { HomeWrapper, Content } from './style';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
+import HeaderAdminBand from '../../components/HeaderAdminBand';
+import HeaderBand from '../../components/HeaderBand';
 
 const Card = styled.div`
     border: 1px solid;
@@ -22,11 +25,23 @@ const Principal = styled.div`
 `;
 
 function Home() {
-    const { conditionalLateralMenu, openLateralMenu } = useLateralMenu("ADMIN");
+    const { role } = useParams();
+    const { conditionalLateralMenu, openLateralMenu } = useLateralMenu(role);
+
+    const decidingHeader = (role) => {
+        switch (role) {
+            case "admin":
+                return <HeaderAdmin openLateralMenu={openLateralMenu} />
+            case "band":
+                return <HeaderBand openLateralMenu={openLateralMenu} />
+            default:
+                return <HeaderAdminBand />
+        }
+    }
 
     return (
         <HomeWrapper>
-            <HeaderAdmin openLateralMenu={openLateralMenu} />
+            {decidingHeader(role)}
             <Content>
                 {conditionalLateralMenu}
                 <Principal>

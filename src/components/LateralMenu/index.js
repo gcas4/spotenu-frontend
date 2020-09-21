@@ -33,21 +33,22 @@ function LateralMenu({ role }) {
     const history = useHistory();
 
     const buttons = (role) => {
-        switch (role) {
+        const roleUpperCase = role.toUpperCase();
+        switch (roleUpperCase) {
             case "ADMIN":
                 return (
                     <ButtonsWrapper>
                         <Button onClick={() => history.push("/admin/approve")}>APROVAR BANDAS</Button>
                         <Button onClick={() => history.push("/signup/admin")}>CADASTRAR ADMIN</Button>
                         <Button onClick={() => history.push("/admin/genre/register")}>CADASTRAR GÊNERO</Button>
-                        <Button onClick={() => history.push("/home")}>HOME</Button>
+                        <Button onClick={() => history.push("/home/admin")}>HOME</Button>
                     </ButtonsWrapper>
                 );
             case "BAND":
                 return (
                     <ButtonsWrapper>
                         <Button onClick={() => history.push("/albums")}>ALBUNS</Button>
-                        <Button onClick={() => history.push("/home")}>HOME</Button>
+                        <Button onClick={() => history.push("/home/band")}>HOME</Button>
                     </ButtonsWrapper>
                 );
             default:

@@ -20,7 +20,7 @@ function Login() {
             history.push("/band/home");
         }
         if (role === "PAYING" || role === "NORMAL") {
-            history.push("/home");
+            history.push("/home/listener");
         }
     }, [role, history])
 

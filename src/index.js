@@ -42,7 +42,7 @@ ReactDOM.render(
         <Route path="/admin/approve" component={BandApprove} exact />
         <Route path="/band/home" component={BandHome} exact />
         <Route path="/albums" component={AlbumList} exact />
-        <Route path="/home" component={Home} exact />
+        <Route path="/home/:role" component={Home} exact />
         <Route component={Page404} />
       </Switch>
     </BrowserRouter>

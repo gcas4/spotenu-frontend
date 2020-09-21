@@ -53,7 +53,7 @@ function AdminHome() {
                 <Button onClick={() => history.push("/admin/approve")}>APROVAR BANDAS</Button>
                 <Button onClick={() => history.push("/signup/admin")}>CADASTRAR ADMIN</Button>
                 <Button onClick={() => history.push("/admin/genre/register")}>CADASTRAR GÊNERO</Button>
-                <Button onClick={() => history.push("/home")}>MÚSICAS</Button>
+                <Button onClick={() => history.push("/home/admin")}>MÚSICAS</Button>
                 <Button>BLOQUEAR USUÁRIO</Button>
             </PagesWrapper>
         </Wrapper>

@@ -51,7 +51,7 @@ function BandHome() {
             <HeaderAdminBand />
             <PagesWrapper>
                 <Button onClick={() => history.push("/albums")}>ÁLBUNS</Button>
-                <Button onClick={() => history.push("/home")}>HOME</Button>
+                <Button onClick={() => history.push("/home/band")}>HOME</Button>
             </PagesWrapper>
         </Wrapper>
     );
